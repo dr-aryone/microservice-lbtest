@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>PoolQueuer</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="http://getbootstrap.com/examples/cover/cover.css">
+
+  <style type="text/css">
+
+  #statusBox {
+    position: absolute;
+    right: 20%;
+    background-color: rgba(178, 178, 178, 0.21);
+    top: 40%;
+    padding: 1em;
+    border-radius: 1em;
+    display:none;
+  }
+
+  @media screen and (max-width:1400px) {
+    #statusBox{
+      right:1%;
+    }
+  }
+
+  @media screen and (max-width:750px) {
+    #statusBox{
+      position:inherit;
+      width:35%;
+      margin:0 auto;
+    }
+  }
+
+  </style>
+
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <div class="site-wrapper" style="background-repeat: no-repeat;background-color: black;background-image: url('http://upload.wikimedia.org/wikipedia/commons/1/17/Billiard_Chalk_and_Cue.jpg');">
+
+    <div class="site-wrapper-inner">
+
+      <div class="cover-container">
+
+        <div class="masthead clearfix">
+          <div class="inner">
+            <h3 class="masthead-brand">Queuer</h3>
+            <nav>
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="#">Queue</a></li>
+                <li><a href="#">Statistics</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="inner cover">
+          <h1 class="cover-heading">PoolQueuer</h1>
+          <p class="lead">Feeling like playing pool? Queue up!</p>
+          <input type="text" style="margin:0 auto 1em; width:40%" class="form-control" placeholder="Name" id="name">
+          <p class="lead">
+            <a href="#" class="btn btn-lg btn-default" id="queue-button">Queue</a>
+            <a href="#" class="btn btn-lg btn-default" style="display:none;" id="dequeue-button">Dequeue</a>
+          </p>
+          <p class="lead">
+            <a href="#" class="btn btn-lg btn-default" style="display:none;" id="done-button">Match done</a>
+          </p>
+          <div id="statusBox">
+            <h2 id="status-text">Players in queue</h2>
+            <ul class="list-group" style="margin: 0 auto;" id="player_list">
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <script>
+    var baseTitle = document.title;
+
+    $('#queue-button').click(onQueueClick);
+
+    $('#dequeue-button').click(onDequeueClick);
+
+    $('#done-button').click(onDoneClick);
+
+    function onQueueClick() {
+      $('#name').prop('disabled', true)
+      var name = $('#name').val() || 'Anonymous';
+      $.post('/queuer/queue_player', {
+        name: name
+      },
+      function(response) {
+        $('#queue-button').hide();
+        $('#dequeue-button').show();
+        checkAgainstServer();
+      });
+    }
+
+    function onDequeueClick() {
+      var name = $('#name').val() || 'Anonymous';
+      $.post('/queuer/dequeue_player', {
+        name: name
+      },
+      function(response) {
+        $('#name').prop('disabled', false)
+        $('#queue-button').show();
+        $('#dequeue-button').hide();
+        checkAgainstServer();
+      });
+    }
+
+    function onDoneClick() {
+      $.post('/queuer/report_results', {},
+      function(response) {
+        $('#name').prop('disabled', false)
+        $('#queue-button').show();
+        $('#statusBox').hide();
+        $('#done-button').hide();
+        checkAgainstServer();
+      });
+    }
+
+    checkAgainstServer();
+    setInterval(checkAgainstServer, 5000);
+
+    function checkAgainstServer(){
+      $.get('/queuer/check', function(r){
+        $('#player_list').empty();
+        $('#statusBox').hide();
+        if(r.matched) {
+          $('#statusBox').show();
+          $('#status-text').html('matched '+r.players[0]+' and '+r.players[1]);
+          $('#queue-button').hide();
+          $('#dequeue-button').hide();
+          $('#done-button').show();
+          $('#player_list').empty();
+        } else {
+          $('#status-text').html('Players in queue');
+          r.players.forEach(function(player) {
+            document.title = "(1) "+baseTitle;
+            $('#statusBox').show();
+            if($('li[name='+player+']').length === 0) {
+              $('#player_list').append('<li class="list-group-item" style="font-size: 1.5em;background-color: transparent;" name="'+player+'">'+player+'</li>');
+            }
+          });
+          if (r.players.length == 0) {
+            document.title = baseTitle;
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>
