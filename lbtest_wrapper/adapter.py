@@ -70,7 +70,7 @@ def __get_state_sequence(consumer):
         else:
             in_game = 'no'
         return in_game+';'+number_in_queue
-        
+
     printstring = ""
 
     for message in consumer:

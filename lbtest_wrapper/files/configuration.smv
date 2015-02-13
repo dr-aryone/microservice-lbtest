@@ -2,7 +2,7 @@ MODULE main
 
 
 VAR
-state: {qrq,q,I};
+state: {qq,q,I};
 in_game : {no,yes};
 people_in_queue : {zero,one,two};
 IVAR
@@ -17,10 +17,10 @@ init(people_in_queue) := zero;
 
 
 next(state):= case
-	state = qrq & input = q : qrq;
-	state = qrq & input = r : I;
-	state = qrq & input = d : qrq;
-	state = q & input = q : qrq;
+	state = qq & input = q : qq;
+	state = qq & input = r : I;
+	state = qq & input = d : qq;
+	state = q & input = q : qq;
 	state = q & input = r : q;
 	state = q & input = d : I;
 	state = I & input = q : q;
@@ -30,9 +30,9 @@ next(state):= case
 
 
 next(in_game):= case
-	state = qrq & input = q : yes;
-	state = qrq & input = r : no;
-	state = qrq & input = d : yes;
+	state = qq & input = q : yes;
+	state = qq & input = r : no;
+	state = qq & input = d : yes;
 	state = q & input = q : yes;
 	state = q & input = r : no;
 	state = q & input = d : no;
@@ -41,9 +41,9 @@ next(in_game):= case
 	state = I & input = d : no;
 	esac;
 next(people_in_queue):= case
-	state = qrq & input = q : zero;
-	state = qrq & input = r : zero;
-	state = qrq & input = d : zero;
+	state = qq & input = q : zero;
+	state = qq & input = r : zero;
+	state = qq & input = d : zero;
 	state = q & input = q : zero;
 	state = q & input = r : one;
 	state = q & input = d : zero;

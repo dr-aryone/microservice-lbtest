@@ -11,18 +11,7 @@ Configuration file is : configuration.txt
 Learning algorithm is :  IKL depth-first
 Equivalence checker strategy is : first difference  
 Model checker is : BDD
-Test session started at : Tue Feb 10 09:30:18 CET 2015
------------------------------------------------------------
-Testing requirement : req1
------------------------------------------------------------
-Hypothesis number 1
- done: normal termination
-Tester is : LBTest 2.1 using 1.x methods
-Configuration file is : configuration.txt
-Learning algorithm is :  IKL depth-first
-Equivalence checker strategy is : first difference  
-Model checker is : BDD
-Test session started at : Tue Feb 10 09:30:37 CET 2015
+Test session started at : Thu Feb 12 15:26:29 CET 2015
 -----------------------------------------------------------
 Testing requirement : req1
 -----------------------------------------------------------
@@ -40,7 +29,7 @@ Stochastic equivalence check failed
 Average difference length = 2
 Random Qs: 1 Learner Qs: 3 Model C Qs: 1
 Using test case : queue,deq from model checker
-Test case duration = 719 msec
+Test case duration = 704 msec
 -----------------------------------------------------------
 Hypothesis number 2
 No counter-example found, requirement is valid
@@ -52,7 +41,7 @@ Stochastic equivalence check failed
 Average difference length = 20
 Random Qs: 2 Learner Qs: 8 Model C Qs: 1
 Using test case : queue,deq,queue,deq,deq,deq,queue,deq,report,report,deq,queue,queue,queue,deq,deq,queue,queue,deq,report from learner suggestion
-Test case duration = 707 msec
+Test case duration = 691 msec
 -----------------------------------------------------------
 Hypothesis number 3
 No counter-example found, requirement is valid
@@ -64,7 +53,7 @@ Stochastic equivalence check failed
 Average difference length = 7
 Random Qs: 3 Learner Qs: 45 Model C Qs: 1
 Using random test case : deq,report,deq,deq,deq,report,queue from equivalence checker
-Test case duration = 4.831 Sec
+Test case duration = 4.760 Sec
 -----------------------------------------------------------
 -----------------------------------------------------------
 Finished testing requirement : req1
@@ -92,7 +81,7 @@ Stochastic equivalence check failed
 Average difference length = 7
 Random Qs: 1 Learner Qs: 3 Model C Qs: 1
 Using test case : deq,report,deq,report,deq,queue,deq from learner suggestion
-Test case duration = 689 msec
+Test case duration = 683 msec
 -----------------------------------------------------------
 Hypothesis number 2
 No counter-example found, requirement is valid
@@ -104,59 +93,7 @@ Stochastic equivalence check failed
 Average difference length = 4
 Random Qs: 2 Learner Qs: 18 Model C Qs: 1
 Using test case : report,queue,queue,report from learner suggestion
-Test case duration = 1.775 Sec
------------------------------------------------------------
-Hypothesis number 3
-MC test case has loop
-MC test case = queue,deq,queue,report,queue
-Hypoth behavior = [[no, zero], [no, one], [yes, zero], [no, one], [yes, zero], [no, one]]
-Actual behavior = [[no, zero], [no, one], [no, zero], [no, one], [no, one], [yes, zero]]
-Test PASSED, LBTest continues.
-NextTestCase = q from MC counter-example is already used 
-ITERATION SUMMARY
-Hypothesis size = 12
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 4
-Random Qs: 3 Learner Qs: 27 Model C Qs: 2
-Using random test case : deq,queue,queue,queue from equivalence checker
-Test case duration = 1.257 Sec
------------------------------------------------------------
------------------------------------------------------------
-Finished testing requirement : req2
------------------------------------------------------------
-Final Hypothesis size = 12
-Total Queries = 32
-Random: 3 = 9.375%
-Learner: 27 = 84.375%
-Model Checker: 2 = 6.25%
------------------------------------------------------------
-Testing requirement : req3
------------------------------------------------------------
-Hypothesis number 1
-No counter-example found, requirement is valid
-ITERATION SUMMARY
-Hypothesis size = 2
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 3
-Random Qs: 1 Learner Qs: 3 Model C Qs: 0
-Using test case : queue,report,queue from learner suggestion
-Test case duration = 609 msec
------------------------------------------------------------
-Hypothesis number 2
-No counter-example found, requirement is valid
-ITERATION SUMMARY
-Hypothesis size = 3
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 2 samples between SUT and hypothesis
-Average difference length = 3
-Random Qs: 2 Learner Qs: 10 Model C Qs: 0
-Using random test case : deq,deq,queue from equivalence checker
-Test case duration = 1.44 Sec
+Test case duration = 1.776 Sec
 -----------------------------------------------------------
 Hypothesis number 3
 No counter-example found, requirement is valid
@@ -165,146 +102,19 @@ Hypothesis size = 3
 No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
  : 1 differences out of 2 samples between SUT and hypothesis
-Average difference length = 3
-Random Qs: 3 Learner Qs: 17 Model C Qs: 0
-Using random test case : report,deq,queue from equivalence checker
-Test case duration = 1.16 Sec
------------------------------------------------------------
------------------------------------------------------------
-Finished testing requirement : req3
------------------------------------------------------------
-Final Hypothesis size = 3
-Total Queries = 20
-Random: 3 = 15.000001%
-Learner: 17 = 85.0%
-Model Checker: 0 = 0.0%
------------------------------------------------------------
------------------------------------------------------------
-Test session finished at : Tue Feb 10 09:30:50 CET 2015
-Test session duration = 12.648 Sec
-Results File is : configuration.xml
-Log File is : configuration.log
- done: normal termination
------------------------------------------------------------
- Loading config file
------------------------------------------------------------
- 
-Valid 1.x Configuration File 
- 
-Tester is : LBTest 2.1 using 1.x methods
-Configuration file is : configuration.txt
-Learning algorithm is :  IKL depth-first
-Equivalence checker strategy is : first difference  
-Model checker is : BDD
-Test session started at : Tue Feb 10 09:44:17 CET 2015
------------------------------------------------------------
-Testing requirement : req1
------------------------------------------------------------
-Hypothesis number 1
-MC test case has loop
-MC test case = queue,queue,report,report,report
-Hypoth behavior = [[no, zero], [no, one], [no, one], [no, one], [no, one], [no, one]]
-Actual behavior = [[no, zero], [no, one], [yes, zero], [no, zero], [no, zero], [no, zero]]
-Test PASSED, LBTest continues.
-NextTestCase = q from MC counter-example is unused 
-ITERATION SUMMARY
-Hypothesis size = 2
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
 Average difference length = 1
-Random Qs: 1 Learner Qs: 3 Model C Qs: 1
-Using test case : queue from model checker
-Test case duration = 690 msec
------------------------------------------------------------
-Hypothesis number 2
-No counter-example found, requirement is valid
-ITERATION SUMMARY
-Hypothesis size = 3
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 20
-Random Qs: 2 Learner Qs: 6 Model C Qs: 1
-Using test case : queue,deq,queue,deq,deq,deq,queue,deq,report,report,deq,queue,queue,queue,deq,deq,queue,queue,deq,report from learner suggestion
-Test case duration = 475 msec
------------------------------------------------------------
-Hypothesis number 3
-No counter-example found, requirement is valid
-ITERATION SUMMARY
-Hypothesis size = 3
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 4 samples between SUT and hypothesis
-Average difference length = 7
-Random Qs: 3 Learner Qs: 45 Model C Qs: 1
-Using random test case : deq,report,deq,deq,deq,report,queue from equivalence checker
-Test case duration = 4.985 Sec
------------------------------------------------------------
------------------------------------------------------------
-Finished testing requirement : req1
------------------------------------------------------------
-Final Hypothesis size = 3
-Total Queries = 49
-Random: 3 = 6.122449%
-Learner: 45 = 91.83673%
-Model Checker: 1 = 2.0408163%
------------------------------------------------------------
-Testing requirement : req2
------------------------------------------------------------
-Hypothesis number 1
-MC test case has loop
-MC test case = queue,deq,report,report,report
-Hypoth behavior = [[no, zero], [no, one], [no, one], [no, one], [no, one], [no, one]]
-Actual behavior = [[no, zero], [no, one], [no, zero], [no, zero], [no, zero], [no, zero]]
-Test PASSED, LBTest continues.
-NextTestCase = q from MC counter-example is already used 
-ITERATION SUMMARY
-Hypothesis size = 2
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 7
-Random Qs: 1 Learner Qs: 3 Model C Qs: 1
-Using test case : deq,report,deq,report,deq,queue,deq from learner suggestion
-Test case duration = 685 msec
------------------------------------------------------------
-Hypothesis number 2
-No counter-example found, requirement is valid
-ITERATION SUMMARY
-Hypothesis size = 3
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 4
-Random Qs: 2 Learner Qs: 18 Model C Qs: 1
-Using test case : report,queue,queue,report from learner suggestion
-Test case duration = 1.764 Sec
------------------------------------------------------------
-Hypothesis number 3
-MC test case has loop
-MC test case = queue,deq,queue,report,queue
-Hypoth behavior = [[no, zero], [no, one], [yes, zero], [no, one], [yes, zero], [no, one]]
-Actual behavior = [[no, zero], [no, one], [no, zero], [no, one], [no, one], [yes, zero]]
-Test PASSED, LBTest continues.
-NextTestCase = q from MC counter-example is already used 
-ITERATION SUMMARY
-Hypothesis size = 12
-No usable MC query exists; finding alternative test case!
-Stochastic equivalence check failed
- : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 4
-Random Qs: 3 Learner Qs: 27 Model C Qs: 2
-Using random test case : deq,queue,queue,queue from equivalence checker
-Test case duration = 1.244 Sec
+Random Qs: 3 Learner Qs: 27 Model C Qs: 1
+Using random test case : queue from equivalence checker
+Test case duration = 1.273 Sec
 -----------------------------------------------------------
 -----------------------------------------------------------
 Finished testing requirement : req2
 -----------------------------------------------------------
-Final Hypothesis size = 12
-Total Queries = 32
-Random: 3 = 9.375%
-Learner: 27 = 84.375%
-Model Checker: 2 = 6.25%
+Final Hypothesis size = 3
+Total Queries = 31
+Random: 3 = 9.677419%
+Learner: 27 = 87.09677%
+Model Checker: 1 = 3.2258062%
 -----------------------------------------------------------
 Testing requirement : req3
 -----------------------------------------------------------
@@ -317,8 +127,8 @@ Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
 Average difference length = 3
 Random Qs: 1 Learner Qs: 3 Model C Qs: 0
-Using test case : queue,report,queue from learner suggestion
-Test case duration = 616 msec
+Using test case : report,queue,queue from learner suggestion
+Test case duration = 588 msec
 -----------------------------------------------------------
 Hypothesis number 2
 MC test case has loop
@@ -331,10 +141,10 @@ ITERATION SUMMARY
 Hypothesis size = 5
 Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 2
+Average difference length = 3
 Random Qs: 2 Learner Qs: 10 Model C Qs: 1
-Using test case : report,queue from model checker
-Test case duration = 1.19 Sec
+Using test case : deq,deq,queue from model checker
+Test case duration = 1.40 Sec
 -----------------------------------------------------------
 Hypothesis number 3
 MC test case has loop
@@ -344,23 +154,23 @@ Actual behavior = [[no, zero], [no, one], [yes, zero], [no, zero], [no, one], [y
 Test PASSED, LBTest continues.
 NextTestCase = qq from MC counter-example is already used 
 ITERATION SUMMARY
-Hypothesis size = 7
+Hypothesis size = 8
 No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
 Average difference length = 3
-Random Qs: 3 Learner Qs: 15 Model C Qs: 2
-Using test case : deq,deq,queue from learner suggestion
-Test case duration = 805 msec
+Random Qs: 3 Learner Qs: 17 Model C Qs: 2
+Using test case : report,deq,queue from learner suggestion
+Test case duration = 1.17 Sec
 -----------------------------------------------------------
 -----------------------------------------------------------
 Finished testing requirement : req3
 -----------------------------------------------------------
-Final Hypothesis size = 7
-Total Queries = 20
-Random: 3 = 15.000001%
-Learner: 15 = 75.0%
-Model Checker: 2 = 10.0%
+Final Hypothesis size = 8
+Total Queries = 22
+Random: 3 = 13.636364%
+Learner: 17 = 77.27273%
+Model Checker: 2 = 9.090909%
 -----------------------------------------------------------
 Testing requirement : req4
 -----------------------------------------------------------
@@ -371,43 +181,47 @@ Hypothesis size = 2
 No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 4
+Average difference length = 6
 Random Qs: 1 Learner Qs: 3 Model C Qs: 0
-Using test case : report,deq,queue,queue from learner suggestion
-Test case duration = 578 msec
+Using test case : report,deq,queue,report,report,deq from learner suggestion
+Test case duration = 583 msec
 -----------------------------------------------------------
 Hypothesis number 2
 No counter-example found, requirement is valid
 ITERATION SUMMARY
-Hypothesis size = 6
+Hypothesis size = 8
 No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 3
-Random Qs: 2 Learner Qs: 12 Model C Qs: 0
-Using test case : report,deq,queue from learner suggestion
-Test case duration = 1.123 Sec
+Average difference length = 13
+Random Qs: 2 Learner Qs: 16 Model C Qs: 0
+Using test case : queue,report,queue,deq,queue,queue,queue,queue,queue,deq,deq,queue,report from learner suggestion
+Test case duration = 1.579 Sec
 -----------------------------------------------------------
 Hypothesis number 3
-No counter-example found, requirement is valid
+MC test case has loop
+MC test case = queue,queue,queue,queue,queue,queue,queue,deq,deq,queue,report,queue,report,report,report
+Hypoth behavior = [[no, zero], [no, one], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [no, one], [no, one], [no, one], [no, one]]
+Actual behavior = [[no, zero], [no, one], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [yes, zero], [no, zero], [no, one], [no, one], [no, one], [no, one]]
+Test PASSED, LBTest continues.
+NextTestCase = qqqqqqqddq from MC counter-example is unused 
 ITERATION SUMMARY
-Hypothesis size = 6
-No usable MC query exists; finding alternative test case!
+Hypothesis size = 20
 Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 2
-Random Qs: 3 Learner Qs: 12 Model C Qs: 0
-Using test case : queue,report from learner suggestion
-Test case duration = 157 msec
+Average difference length = 1
+Random Qs: 3 Learner Qs: 43 Model C Qs: 1
+Using test case : queue from model checker
+Test case duration = 3.348 Sec
 -----------------------------------------------------------
 -----------------------------------------------------------
 Finished testing requirement : req4
 -----------------------------------------------------------
-Final Hypothesis size = 6
-Total Queries = 15
-Random: 3 = 20.0%
-Learner: 12 = 80.0%
-Model Checker: 0 = 0.0%
+Final Hypothesis size = 20
+Total Queries = 47
+Random: 3 = 6.382979%
+Learner: 43 = 91.489365%
+Model Checker: 1 = 2.1276596%
 -----------------------------------------------------------
 Testing requirement : req5
 -----------------------------------------------------------
@@ -419,10 +233,10 @@ Hypothesis size = 2
 No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
  : 1 differences out of 1 samples between SUT and hypothesis
-Average difference length = 3
+Average difference length = 4
 Random Qs: 1 Learner Qs: 3 Model C Qs: 0
-Using test case : queue,report,queue from learner suggestion
-Test case duration = 562 msec
+Using test case : queue,report,report,deq from learner suggestion
+Test case duration = 580 msec
 -----------------------------------------------------------
 Hypothesis number 2
 No counter-example found, requirement is valid
@@ -430,11 +244,11 @@ ITERATION SUMMARY
 Hypothesis size = 3
 No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
- : 1 differences out of 2 samples between SUT and hypothesis
-Average difference length = 1
-Random Qs: 2 Learner Qs: 10 Model C Qs: 0
-Using random test case : queue from equivalence checker
-Test case duration = 1.34 Sec
+ : 1 differences out of 1 samples between SUT and hypothesis
+Average difference length = 4
+Random Qs: 2 Learner Qs: 12 Model C Qs: 0
+Using test case : queue,queue,deq,report from learner suggestion
+Test case duration = 1.156 Sec
 -----------------------------------------------------------
 Hypothesis number 3
 No counter-example found, requirement is valid
@@ -444,19 +258,19 @@ No usable MC query exists; finding alternative test case!
 Stochastic equivalence check failed
  : 1 differences out of 2 samples between SUT and hypothesis
 Average difference length = 5
-Random Qs: 3 Learner Qs: 10 Model C Qs: 0
+Random Qs: 3 Learner Qs: 19 Model C Qs: 0
 Using random test case : deq,deq,deq,deq,queue from equivalence checker
-Test case duration = 255 msec
+Test case duration = 1.25 Sec
 -----------------------------------------------------------
 -----------------------------------------------------------
 Finished testing requirement : req5
 -----------------------------------------------------------
 Final Hypothesis size = 3
-Total Queries = 13
-Random: 3 = 23.076923%
-Learner: 10 = 76.92308%
+Total Queries = 22
+Random: 3 = 13.636364%
+Learner: 19 = 86.36364%
 Model Checker: 0 = 0.0%
 -----------------------------------------------------------
 -----------------------------------------------------------
-Test session finished at : Tue Feb 10 09:44:33 CET 2015
-Test session duration = 15.994 Sec
+Test session finished at : Thu Feb 12 15:26:49 CET 2015
+Test session duration = 20.804 Sec

@@ -157,22 +157,23 @@
         $('#player_list').empty();
         $('#statusBox').hide();
         if(r.matched) {
+          document.title = "(M) "+baseTitle;
           $('#statusBox').show();
-          $('#status-text').html('matched '+r.players[0]+' and '+r.players[1]);
+          $('#status-text').html('matched '+r.matched_players[0]+' and '+r.matched_players[1]);
           $('#queue-button').hide();
           $('#dequeue-button').hide();
           $('#done-button').show();
           $('#player_list').empty();
         } else {
           $('#status-text').html('Players in queue');
-          r.players.forEach(function(player) {
+          r.queued_players.forEach(function(player) {
             document.title = "(1) "+baseTitle;
             $('#statusBox').show();
             if($('li[name='+player+']').length === 0) {
               $('#player_list').append('<li class="list-group-item" style="font-size: 1.5em;background-color: transparent;" name="'+player+'">'+player+'</li>');
             }
           });
-          if (r.players.length == 0) {
+          if (r.matched_players.length == 0 && r.queued_players.length == 0 ) {
             document.title = baseTitle;
           }
         }

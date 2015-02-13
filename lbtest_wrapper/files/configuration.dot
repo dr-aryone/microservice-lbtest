@@ -3,10 +3,10 @@ randir = LR
 node[shape = circle];
 a[style = "invis"];
 a->"I\n\nno;zero";
-"qrq\n\nyes;zero"->"qrq\n\nyes;zero"	[label=q];
-"qrq\n\nyes;zero"->"I\n\nno;zero"	[label=r];
-"qrq\n\nyes;zero"->"qrq\n\nyes;zero"	[label=d];
-"q\n\nno;one"->"qrq\n\nyes;zero"	[label=q];
+"qq\n\nyes;zero"->"qq\n\nyes;zero"	[label=q];
+"qq\n\nyes;zero"->"I\n\nno;zero"	[label=r];
+"qq\n\nyes;zero"->"qq\n\nyes;zero"	[label=d];
+"q\n\nno;one"->"qq\n\nyes;zero"	[label=q];
 "q\n\nno;one"->"q\n\nno;one"	[label=r];
 "q\n\nno;one"->"I\n\nno;zero"	[label=d];
 "I\n\nno;zero"->"q\n\nno;one"	[label=q];

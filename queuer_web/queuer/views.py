@@ -79,14 +79,15 @@ def check(request):
     consumer = SimpleConsumer(kafka, 'client', 'queue', iter_timeout=0.2)
 
     matched = False
-    players = []
+    queued_players = []
+    matched_players = []
     update = False
 
     for message in consumer:
         payload = json.loads(message.message.value)
         if('event' in payload and payload['event'] == 'queue_info'):
             update = True
-            players = payload['players_in_queue']
+            queued_players = payload['players_in_queue']
             matched = payload['in_game']
             if (not matched):
                 current_games = Game.objects.filter(active=True)
@@ -95,15 +96,16 @@ def check(request):
                     current_game.active = False
                     current_game.save()
         elif('event' in payload and payload['event'] == 'match_created'):
-            players = payload['players']
-            g = Game(p1=players[0], p2=players[1])
+            matched_players = payload['players']
+            queued_players = []
+            g = Game(p1=matched_players[0], p2=matched_players[1])
             g.save()
 
     kafka.close()
 
     if (not matched and update):
         QueuedPlayer.objects.all().delete()
-        for player in players:
+        for player in queued_players:
             p = QueuedPlayer(name=player)
             try:
                 p.save()
@@ -111,21 +113,18 @@ def check(request):
                 print(e)
 
     if (not update):
-        players = []
+        queued_players = []
         for player in QueuedPlayer.objects.all():
-            players.append(player.name)
-        if (matched):
-            g = Game(p1=players[0], p2=players[1])
-            g.save()
+            queued_players.append(player.name)
 
     current_games = Game.objects.filter(active=True)
     if (len(current_games) > 0):
         current_game = current_games[0]
-        players = [current_game.p1, current_game.p2]
+        matched_players = [current_game.p1, current_game.p2]
         matched = True
     else:
         matched = False
 
-    response = json.dumps({'players': players, 'matched': matched})
+    response = json.dumps({'queued_players':queued_players,'matched_players': matched_players, 'matched': matched})
 
     return HttpResponse(response, content_type="application/json")
