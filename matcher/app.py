@@ -1,7 +1,11 @@
+#!/usr/local/bin/python
+
 from kafka import KafkaClient, SimpleProducer, SimpleConsumer
 from kafka.common import OffsetOutOfRangeError
 import json
 from collections import deque
+import signal
+import sys
 
 class Matcher(object):
 
@@ -12,6 +16,14 @@ class Matcher(object):
         kafka = KafkaClient('localhost:9092')
         self.consumer = SimpleConsumer(kafka, 'matcher', 'queue')
         self.producer = SimpleProducer(kafka)
+        def exit_handler(signum, frame):
+            self.consumer.commit()
+            kafka.close()
+            sys.exit(0)
+
+        for sig in [signal.SIGTERM, signal.SIGINT, signal.SIGHUP, signal.SIGQUIT]:
+            signal.signal(sig, exit_handler)
+
         self.match_goal = match_goal
         self.__listen()
 
@@ -72,4 +84,4 @@ class Matcher(object):
         message = json.dumps({'event' : 'queue_info', 'players_in_queue' : list(self.people_in_queue), 'in_game':self.in_game})
         self.producer.send_messages('queue', message)
 
-Matcher(2)
+m = Matcher(2)

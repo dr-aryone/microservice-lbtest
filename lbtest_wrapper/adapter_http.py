@@ -3,11 +3,10 @@ from sys import stdin
 import requests
 import json
 
-class CommandCreator(object):
-
+class Adapter(object):
     curr_player = 0
 
-    def get_command(self, symbol):
+    def _get_command(self, symbol):
         if(symbol == 'q'):
             payload = {
                 'name': 'p' + str(self.curr_player)
@@ -26,7 +25,7 @@ class CommandCreator(object):
         else:
             return ('http://127.0.0.1:8000/queuer/check', '', 'get')
 
-    def get_rollback_commands(self):
+    def _get_rollback_commands(self):
         deque = []
 
         while(self.curr_player > 0):
@@ -39,64 +38,60 @@ class CommandCreator(object):
             )
         return deque
 
+    def _send_testcases(self, commands):
+        command = self._get_command('')
+        responses = []
+        responses.append(requests.get(command[0]))
 
+        if(len(commands) == 1 and commands[0] == ''):
+            return responses
 
-def __send_testcases(commands, command_creator):
-    command = command_creator.get_command('')
-    responses = []
-    responses.append(requests.get(command[0]))
+        for c in commands:
+            command = self._get_command(c)
+            requests.post(command[0], data=command[1])
+            responses.append(requests.get(self._get_command('')[0]))
 
-    if(len(commands) == 1 and commands[0] == ''):
         return responses
 
-    for c in commands:
-        command = command_creator.get_command(c)
-        requests.post(command[0], data=command[1])
-        responses.append(requests.get(command_creator.get_command('')[0]))
+    def _get_state_sequence(self, responses):
+        def get_state(in_game, number_in_queue):
+            if (number_in_queue == 0):
+                number_in_queue = 'zero'
+            elif (number_in_queue == 1):
+                number_in_queue = 'one'
+            elif (number_in_queue >= 2):
+                number_in_queue = 'two'
+            if (in_game):
+                in_game = 'yes'
+            else:
+                in_game = 'no'
+            return in_game+';'+number_in_queue
 
-    return responses
-
-def __get_state_sequence(responses):
-    def get_state(in_game, number_in_queue):
-        if (number_in_queue == 0):
-            number_in_queue = 'zero'
-        elif (number_in_queue == 1):
-            number_in_queue = 'one'
-        elif (number_in_queue >= 2):
-            number_in_queue = 'two'
-        if (in_game):
-            in_game = 'yes'
-        else:
-            in_game = 'no'
-        return in_game+';'+number_in_queue
-
-    printstring = ""
-
-    for response in responses:
-        payload = response.json()
-        printstring += get_state(payload['matched'], len(payload['queued_players']))+","
-
-    return printstring
+        printstring = ""
+        for response in responses:
+            payload = response.json()
+            printstring += get_state(payload['matched'], len(payload['queued_players']))+","
+        return printstring
 
 
-def __rollback(command_creator):
-    requests.post('http://127.0.0.1:8000/queuer/report_results')
-
-    rollbacks = command_creator.get_rollback_commands()
-
-    for command in rollbacks:
-        requests.post(command[0], data=command[1])
+    def _rollback(self):
+        requests.post('http://127.0.0.1:8000/queuer/report_results')
+        rollbacks = self._get_rollback_commands()
+        for command in rollbacks:
+            requests.post(command[0], data=command[1])
 
 
-def execute_testcase(line, command_creator):
-    commands = line.split(",")
-    responses = __send_testcases(commands, command_creator)
-    printstring = __get_state_sequence(responses)
-    __rollback(command_creator)
-    return printstring[:-1]
+    def execute_testcase(self, line):
+        commands = line.split(",")
+        responses = self._send_testcases(commands)
+        printstring = self._get_state_sequence(responses)
+        self._rollback()
+        return printstring[:-1]
 
-cc = CommandCreator()
-while(True):
-    line = stdin.readline().strip()
-    result = execute_testcase(line, cc)
-    print result
+    def run(self):
+        while(True):
+            line = stdin.readline().strip()
+            result = self.execute_testcase(line)
+            print result
+
+Adapter().run()

@@ -3,13 +3,13 @@ randir = LR
 node[shape = circle];
 a[style = "invis"];
 a->"I\n\nno;zero";
-"rqq\n\nyes;zero"->"rqq\n\nyes;zero"	[label=q];
-"rqq\n\nyes;zero"->"I\n\nno;zero"	[label=r];
-"rqq\n\nyes;zero"->"rqq\n\nyes;zero"	[label=d];
-"I\n\nno;zero"->"rq\n\nno;one"	[label=q];
+"q\n\nno;one"->"qdqdddqdrrdqq\n\nyes;zero"	[label=q];
+"q\n\nno;one"->"q\n\nno;one"	[label=r];
+"q\n\nno;one"->"I\n\nno;zero"	[label=d];
+"qdqdddqdrrdqq\n\nyes;zero"->"qdqdddqdrrdqq\n\nyes;zero"	[label=q];
+"qdqdddqdrrdqq\n\nyes;zero"->"I\n\nno;zero"	[label=r];
+"qdqdddqdrrdqq\n\nyes;zero"->"qdqdddqdrrdqq\n\nyes;zero"	[label=d];
+"I\n\nno;zero"->"q\n\nno;one"	[label=q];
 "I\n\nno;zero"->"I\n\nno;zero"	[label=r];
 "I\n\nno;zero"->"I\n\nno;zero"	[label=d];
-"rq\n\nno;one"->"rqq\n\nyes;zero"	[label=q];
-"rq\n\nno;one"->"rq\n\nno;one"	[label=r];
-"rq\n\nno;one"->"I\n\nno;zero"	[label=d];
 }

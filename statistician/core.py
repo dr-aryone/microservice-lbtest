@@ -11,7 +11,7 @@ class Statistician(object):
     def __init__(self):
         kafka = KafkaClient('localhost:9092')
         self.consumer = SimpleConsumer(kafka, 'statistician', 'queue')
-        cluster = Cluster()
+        cluster = Cluster(contact_points=["192.168.56.101"])
         self.session = cluster.connect('sports_matcher')
         self.__listen()
 

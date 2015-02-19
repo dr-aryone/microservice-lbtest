@@ -165,6 +165,8 @@
           $('#done-button').show();
           $('#player_list').empty();
         } else {
+          $('#queue-button').show();
+          $('#done-button').hide();
           $('#status-text').html('Players in queue');
           r.queued_players.forEach(function(player) {
             document.title = "(1) "+baseTitle;

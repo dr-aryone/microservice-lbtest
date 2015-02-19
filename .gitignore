@@ -1,3 +1,4 @@
 .DS_Store
 kafka_2.9.2-0.8.1.1/*
 queuer_web/db.sqlite3
+lbtest_wrapper/files/*

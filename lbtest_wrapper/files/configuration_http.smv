@@ -2,7 +2,7 @@ MODULE main
 
 
 VAR
-state: {rqq,I,rq};
+state: {q,qdqdddqdrrdqq,I};
 in_game : {no,yes};
 people_in_queue : {zero,one,two};
 IVAR
@@ -17,41 +17,45 @@ init(people_in_queue) := zero;
 
 
 next(state):= case
-	state = rqq & input = q : rqq;
-	state = rqq & input = r : I;
-	state = rqq & input = d : rqq;
-	state = I & input = q : rq;
+	state = q & input = q : qdqdddqdrrdqq;
+	state = q & input = r : q;
+	state = q & input = d : I;
+	state = qdqdddqdrrdqq & input = q : qdqdddqdrrdqq;
+	state = qdqdddqdrrdqq & input = r : I;
+	state = qdqdddqdrrdqq & input = d : qdqdddqdrrdqq;
+	state = I & input = q : q;
 	state = I & input = r : I;
 	state = I & input = d : I;
-	state = rq & input = q : rqq;
-	state = rq & input = r : rq;
-	state = rq & input = d : I;
 	esac;
 
 
 next(in_game):= case
-	state = rqq & input = q : yes;
-	state = rqq & input = r : no;
-	state = rqq & input = d : yes;
+	state = q & input = q : yes;
+	state = q & input = r : no;
+	state = q & input = d : no;
+	state = qdqdddqdrrdqq & input = q : yes;
+	state = qdqdddqdrrdqq & input = r : no;
+	state = qdqdddqdrrdqq & input = d : yes;
 	state = I & input = q : no;
 	state = I & input = r : no;
 	state = I & input = d : no;
-	state = rq & input = q : yes;
-	state = rq & input = r : no;
-	state = rq & input = d : no;
 	esac;
 next(people_in_queue):= case
-	state = rqq & input = q : zero;
-	state = rqq & input = r : zero;
-	state = rqq & input = d : zero;
+	state = q & input = q : zero;
+	state = q & input = r : one;
+	state = q & input = d : zero;
+	state = qdqdddqdrrdqq & input = q : zero;
+	state = qdqdddqdrrdqq & input = r : zero;
+	state = qdqdddqdrrdqq & input = d : zero;
 	state = I & input = q : one;
 	state = I & input = r : zero;
 	state = I & input = d : zero;
-	state = rq & input = q : zero;
-	state = rq & input = r : one;
-	state = rq & input = d : zero;
 	esac;
 
 
 LTLSPEC
-G(people_in_queue=one & input=d -> X(people_in_queue=zero & in_game=no))
+G(people_in_queue=one & input=q -> X(people_in_queue=zero & in_game=yes)) &
+  G(people_in_queue=one & input=d -> X(people_in_queue=zero & in_game=no)) &
+  G(in_game=yes & input=r -> X(in_game=no)) &
+  G(in_game=yes & input=q -> X(people_in_queue=zero))&
+  G(people_in_queue=zero & input=q & in_game=FALSE -> X(people_in_queue=one))

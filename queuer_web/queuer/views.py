@@ -23,13 +23,7 @@ def queue_player(request):
         'player': request.POST['name']
     }
 
-
-    kafka = KafkaClient('localhost:9092')
-    producer = SimpleProducer(kafka)
-
     producer.send_messages('queue', json.dumps(internalMessage))
-    kafka.close()
-
     return HttpResponse("You are queued")
 
 @csrf_exempt
@@ -42,12 +36,7 @@ def dequeue_player(request):
         'player': request.POST['name']
     }
 
-
-    kafka = KafkaClient('localhost:9092')
-    producer = SimpleProducer(kafka)
-
     producer.send_messages('queue', json.dumps(internalMessage))
-    kafka.close()
 
     return HttpResponse("You are dequeued")
 
@@ -61,12 +50,7 @@ def report_results(request):
         'event':'results_reported'
     }
 
-
-    kafka = KafkaClient('localhost:9092')
-    producer = SimpleProducer(kafka)
-
     producer.send_messages('queue', json.dumps(internalMessage))
-    kafka.close()
 
     return HttpResponse("You reported results")
 
@@ -74,9 +58,6 @@ def report_results(request):
 def check(request):
     if request.method != 'GET':
         return HttpResponse('Not get')
-
-    kafka = KafkaClient('localhost:9092')
-    consumer = SimpleConsumer(kafka, 'client', 'queue', iter_timeout=0.2)
 
     matched = False
     queued_players = []
@@ -101,7 +82,6 @@ def check(request):
             g = Game(p1=matched_players[0], p2=matched_players[1])
             g.save()
 
-    kafka.close()
 
     if (not matched and update):
         QueuedPlayer.objects.all().delete()
@@ -128,3 +108,7 @@ def check(request):
     response = json.dumps({'queued_players':queued_players,'matched_players': matched_players, 'matched': matched})
 
     return HttpResponse(response, content_type="application/json")
+
+kafka = KafkaClient('localhost:9092')
+producer = SimpleProducer(kafka)
+consumer = SimpleConsumer(kafka, 'client', 'queue', iter_timeout=0.2)

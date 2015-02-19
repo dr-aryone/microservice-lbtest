@@ -1,8 +1,8 @@
 sutpath = /Users/petern/programmering/test-project/lbtest_wrapper/;
-sutfile = adapter_http.py;
+sutfile = adapter_restarts.py;
 str1 = python;
 str2 = -u;
-str3 = adapter_http.py;
+str3 = adapter_restarts.py;
 nusmvpath = /opt/local/bin/NuSMV;
 smvpath = /Users/petern/programmering/test-project/lbtest_wrapper/files/;
 dotpath = /Users/petern/programmering/test-project/lbtest_wrapper/files/;
@@ -11,8 +11,9 @@ resultspath = /Users/petern/programmering/test-project/lbtest_wrapper/files/;
 vectorlength = 2;
 output_types = [in_game, people_in_queue];
 output_values = {no:in_game, yes:in_game, zero:people_in_queue, one:people_in_queue, two:people_in_queue};
-inputs = { q=queue, d=deq, r=report};
+inputs = { q=queue, d=deq, r=report, x=restart_matcher};
 ltlspecs  = {
+[req6,G(input = restart_matcher -> X(people_in_queue = zero & in_game = no)),unused,unused],
 [req1,G(people_in_queue = one & input = queue -> X(people_in_queue = zero & in_game = yes)),unused,unused],
 [req2,G(people_in_queue = one & input = deq -> X(people_in_queue = zero & in_game = no)),unused,unused],
 [req3,G(in_game = yes & input = report -> X(in_game = no)),unused,unused],
