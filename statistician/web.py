@@ -3,7 +3,7 @@ from cassandra.cluster import Cluster
 
 class Web_server(BaseHTTPRequestHandler):
 
-    cluster = Cluster()
+    cluster = Cluster(contact_points=["192.168.56.101"])
     session = cluster.connect('sports_matcher')
 
     def do_GET(self):

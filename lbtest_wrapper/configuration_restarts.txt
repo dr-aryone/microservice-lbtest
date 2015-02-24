@@ -18,4 +18,4 @@ ltlspecs  = {
 [req2,G(people_in_queue = one & input = deq -> X(people_in_queue = zero & in_game = no)),unused,unused],
 [req3,G(in_game = yes & input = report -> X(in_game = no)),unused,unused],
 [req4,G(in_game = yes & input = queue -> X(people_in_queue = zero)),unused,unused],
-[req5,G(people_in_queue = zero & input = queue & in_game = false -> X(people_in_queue = one)),unused,unused]};
+[req5,G(people_in_queue = zero & input = queue & in_game = no -> X(people_in_queue = one)),unused,unused]};

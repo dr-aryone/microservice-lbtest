@@ -13,8 +13,8 @@ output_types = [in_game, people_in_queue];
 output_values = {no:in_game, yes:in_game, zero:people_in_queue, one:people_in_queue, two:people_in_queue};
 inputs = { q=queue, d=deq, r=report};
 ltlspecs  = {
-[req1,G(people_in_queue = one & input = queue -> X(people_in_queue = zero & in_game = yes)),tmp,wat],
-[req2,G(people_in_queue = one & input = deq -> X(people_in_queue = zero & in_game = no)),tmp,wat],
-[req3,G(in_game = yes & input = report -> X(in_game = no)),tmp,wat],
-[req4,G(in_game = yes & input = queue -> X(people_in_queue = zero)),tmp,wat],
-[req5,G(people_in_queue = zero & input = queue & in_game = false -> X(people_in_queue = one)),tmp,wat]};
+[req1,G(people_in_queue = one & input = queue -> X(people_in_queue = zero & in_game = yes)),unused,unused],
+[req2,G(people_in_queue = one & input = deq -> X(people_in_queue = zero & in_game = no)),unused,unused],
+[req3,G(in_game = yes & input = report -> X(in_game = no)),unused,unused],
+[req4,G(in_game = yes & input = queue -> X(people_in_queue = zero)),unused,unused],
+[req5,G(people_in_queue = zero & input = queue & in_game = no -> X(people_in_queue = one)),unused,unused]};
